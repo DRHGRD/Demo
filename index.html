@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payal Photography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --charcoal: #1A1A1A;
+      --offwhite: #F7F2EC;
+      --rose: #C9897A;
+      --gold: #D4A96A;
+      --sage: #8A9E8C;
+      --mid: #5A5550;
+      --light: #E8E2DA;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--charcoal);
+      color: var(--offwhite);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 3rem;
+      mix-blend-mode: normal;
+      transition: background 0.4s, padding 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(26,26,26,0.92);
+      backdrop-filter: blur(10px);
+      padding: 1rem 3rem;
+      border-bottom: 1px solid rgba(212,169,106,0.15);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--offwhite);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      color: var(--light);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 1.5px;
+      background: var(--offwhite); transition: all 0.35s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 99;
+      background: rgba(26,26,26,0.97);
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 2.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--offwhite); text-decoration: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem; font-weight: 300;
+      letter-spacing: 0.08em;
+      transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: var(--rose); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      position: relative; overflow: hidden;
+    }
+    .hero-left {
+      display: flex; flex-direction: column;
+      justify-content: center; padding: 8rem 4rem 4rem 5rem;
+      position: relative; z-index: 2;
+    }
+    .hero-eyebrow {
+      font-size: 0.7rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 6vw, 6rem);
+      font-weight: 300; line-height: 1.05;
+      color: var(--offwhite);
+    }
+    .hero-title em {
+      font-style: italic; color: var(--rose);
+      display: block;
+    }
+    .hero-tagline {
+      margin-top: 2rem;
+      font-size: 0.9rem; line-height: 1.8;
+      color: rgba(247,242,236,0.55);
+      max-width: 340px;
+      letter-spacing: 0.02em;
+    }
+    .hero-cta {
+      margin-top: 3rem; display: flex; gap: 1.2rem; flex-wrap: wrap;
+    }
+    .btn-primary {
+      padding: 0.85rem 2.2rem;
+      background: var(--rose); color: var(--offwhite);
+      border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-primary:hover { background: #b8756a; transform: translateY(-2px); }
+    .btn-outline {
+      padding: 0.85rem 2.2rem;
+      background: transparent; color: var(--offwhite);
+      border: 1px solid rgba(247,242,236,0.3);
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem; font-weight: 400;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      text-decoration: none;
+      transition: border-color 0.3s, color 0.3s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    .hero-right {
+      position: relative; overflow: hidden;
+    }
+    .hero-image-wrap {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    /* Hero photo - real image */
+    .hero-photo {
+      width: 100%; height: 100%;
+      background: url('https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=900&q=80') center center / cover no-repeat;
+      position: relative;
+    }
+    .hero-photo::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(26,26,26,0.35) 0%, rgba(26,26,26,0.1) 100%);
+    }
+    /* Silhouette portrait SVG overlaid */
+    .hero-photo::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 50% 80%, rgba(26,26,26,0.2) 0%, transparent 70%);
+    }
+    .hero-photo-inner {
+      position: absolute; inset: 0;
+      display: flex; align-items: flex-end; justify-content: center;
+      padding-bottom: 0;
+    }
+    .portrait-svg {
+      width: 70%; max-width: 320px;
+      opacity: 0.85;
+      filter: drop-shadow(0 0 40px rgba(201,137,122,0.2));
+    }
+    .hero-overlay-text {
+      position: absolute; bottom: 2.5rem; right: 2.5rem;
+      text-align: right;
+    }
+    .hero-overlay-text p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem; font-style: italic;
+      color: rgba(247,242,236,0.35);
+      letter-spacing: 0.05em;
+    }
+    /* Gold vertical line on divider */
+    .hero::after {
+      content: '';
+      position: absolute; top: 15%; bottom: 15%;
+      left: 50%; width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+      opacity: 0.3;
+    }
+    .scroll-hint {
+      position: absolute; bottom: 2.5rem; left: 5rem;
+      display: flex; align-items: center; gap: 0.8rem;
+      color: rgba(247,242,236,0.3);
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    }
+    .scroll-hint::before {
+      content: '';
+      display: block; width: 40px; height: 1px;
+      background: var(--gold); opacity: 0.5;
+    }
+
+    /* ─── SECTION BASE ─── */
+    section { padding: 7rem 5rem; }
+    .section-eyebrow {
+      font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.2rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300; line-height: 1.15;
+      color: var(--offwhite);
+    }
+    .section-title em { font-style: italic; color: var(--rose); }
+    .divider {
+      width: 50px; height: 1px;
+      background: var(--gold); margin: 2rem 0;
+    }
+
+    /* ─── ABOUT ─── */
+    .about {
+      background: var(--offwhite);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+      align-items: center;
+    }
+    .about .section-eyebrow { color: var(--rose); }
+    .about .section-title { color: var(--charcoal); }
+    .about .divider { background: var(--rose); }
+    .about-text p {
+      color: var(--mid); font-size: 0.95rem; line-height: 1.9;
+      margin-bottom: 1.2rem;
+    }
+    .about-stats {
+      display: flex; gap: 2.5rem; margin-top: 2.5rem;
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem; font-weight: 300;
+      color: var(--charcoal); line-height: 1;
+    }
+    .stat-num span { color: var(--rose); font-size: 1.8rem; }
+    .stat-label {
+      font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--mid); margin-top: 0.3rem;
+    }
+    .about-image-side {
+      position: relative;
+    }
+    .about-img-box {
+      width: 100%; aspect-ratio: 3/4;
+      background: linear-gradient(160deg, #2a1f1b 0%, #1a1210 100%);
+      position: relative; overflow: hidden;
+    }
+    .about-img-box::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+    }
+    .about-img-accent {
+      position: absolute; bottom: -1.5rem; right: -1.5rem;
+      width: 60%; aspect-ratio: 1;
+      border: 1px solid rgba(212,169,106,0.3);
+      z-index: 0;
+    }
+    .about-img-label {
+      position: absolute; bottom: 1.5rem; left: 1.5rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem; font-style: italic;
+      color: rgba(247,242,236,0.5);
+    }
+    .camera-icon {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      opacity: 0.12;
+    }
+
+    /* ─── PORTFOLIO ─── */
+    .portfolio { background: #141414; }
+    .portfolio-header {
+      display: flex; align-items: flex-end;
+      justify-content: space-between; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem;
+    }
+    .portfolio-filters {
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: none; border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: rgba(247,242,236,0.4);
+      padding: 0.4rem 0; border-bottom: 1px solid transparent;
+      transition: all 0.3s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      color: var(--gold); border-bottom-color: var(--gold);
+    }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto;
+      gap: 1.2rem;
+    }
+    .portfolio-item {
+      position: relative; overflow: hidden; cursor: pointer;
+    }
+    .portfolio-item:nth-child(1) { grid-row: span 2; }
+    .portfolio-item:nth-child(4) { grid-column: span 2; }
+    .portfolio-thumb {
+      width: 100%; height: 100%; min-height: 220px;
+      display: block; transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .portfolio-item:hover .portfolio-thumb { transform: scale(1.05); }
+    .portfolio-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,26,26,0.85) 0%, transparent 50%);
+      opacity: 0; transition: opacity 0.4s;
+      display: flex; align-items: flex-end; padding: 1.5rem;
+    }
+    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+    .portfolio-info p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 300;
+      color: var(--offwhite);
+    }
+    .portfolio-info span {
+      font-size: 0.68rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--gold);
+    }
+
+    /* SVG placeholder photos */
+    .photo-1 { background: url('https://images.unsplash.com/photo-1519741347686-c1e0aadf4611?w=800&q=80') center/cover no-repeat; }
+    .photo-2 { background: url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=700&q=80') center/cover no-repeat; }
+    .photo-3 { background: url('https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=700&q=80') center top/cover no-repeat; }
+    .photo-4 { background: url('https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=900&q=80') center/cover no-repeat; }
+    .photo-5 { background: url('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=700&q=80') center/cover no-repeat; }
+    .photo-6 { background: url('https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=700&q=80') center/cover no-repeat; }
+
+    .photo-label {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      opacity: 0.18;
+    }
+    .photo-label svg { display: block; margin: 0 auto 0.5rem; }
+    .photo-label p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.75rem; letter-spacing: 0.12em;
+      color: var(--offwhite); text-transform: uppercase;
+    }
+
+    /* ─── SERVICES ─── */
+    .services { background: var(--charcoal); }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 4rem;
+    }
+    .service-card {
+      border: 1px solid rgba(247,242,236,0.07);
+      transition: transform 0.35s, border-color 0.35s, box-shadow 0.35s;
+      position: relative; overflow: hidden;
+      background: #1e1e1e;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(212,169,106,0.3);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+    .service-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--rose), var(--gold));
+      transform: scaleX(0);
+      transition: transform 0.4s;
+      transform-origin: left;
+    }
+    .service-card:hover::after { transform: scaleX(1); }
+
+    /* Photo on top of card */
+    .service-photo {
+      width: 100%; aspect-ratio: 4/3;
+      overflow: hidden; position: relative;
+    }
+    .service-photo img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+      filter: brightness(0.88) saturate(0.9);
+    }
+    .service-card:hover .service-photo img {
+      transform: scale(1.07);
+      filter: brightness(0.95) saturate(1);
+    }
+    .service-photo-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(30,30,30,0.7) 100%);
+    }
+    .service-num-badge {
+      position: absolute; top: 1rem; left: 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.75rem; font-weight: 400;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      background: rgba(26,26,26,0.75);
+      backdrop-filter: blur(4px);
+      padding: 0.3rem 0.7rem;
+      border: 1px solid rgba(212,169,106,0.3);
+    }
+
+    /* Text below photo */
+    .service-body { padding: 1.8rem 2rem 2rem; }
+    .service-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 400;
+      color: var(--offwhite); margin-bottom: 0.7rem;
+    }
+    .service-desc {
+      font-size: 0.83rem; line-height: 1.8;
+      color: rgba(247,242,236,0.45);
+    }
+    .service-price {
+      margin-top: 1.4rem;
+      font-size: 0.7rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .service-price::before {
+      content: ''; display: block;
+      width: 20px; height: 1px; background: var(--gold); opacity: 0.5;
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials {
+      background: #0f0f0f;
+      text-align: center;
+    }
+    .testimonials .section-title { margin: 0 auto; max-width: 600px; }
+    .testimonials .divider { margin: 2rem auto; }
+    .testimonial-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 4rem;
+    }
+    .testimonial-card {
+      padding: 2.5rem;
+      border: 1px solid rgba(247,242,236,0.07);
+      text-align: left;
+      transition: border-color 0.3s;
+      position: relative;
+    }
+    .testimonial-card:hover { border-color: rgba(212,169,106,0.3); }
+    .quote-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem; line-height: 0.8;
+      color: var(--rose); opacity: 0.4;
+      margin-bottom: 1rem; display: block;
+    }
+    .testimonial-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-style: italic;
+      line-height: 1.7; color: rgba(247,242,236,0.75);
+      margin-bottom: 2rem;
+    }
+    .testimonial-author {
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .author-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--rose), var(--gold));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; color: var(--offwhite);
+    }
+    .author-name {
+      font-size: 0.85rem; color: var(--offwhite); font-weight: 500;
+    }
+    .author-detail {
+      font-size: 0.7rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(247,242,236,0.35);
+      margin-top: 0.2rem;
+    }
+
+    /* ─── CONTACT ─── */
+    .contact {
+      background: var(--offwhite);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+      align-items: start;
+    }
+    .contact .section-eyebrow { color: var(--rose); }
+    .contact .section-title { color: var(--charcoal); }
+    .contact .divider { background: var(--rose); }
+    .contact-intro {
+      font-size: 0.9rem; line-height: 1.9;
+      color: var(--mid); margin-bottom: 2.5rem;
+    }
+    .contact-detail {
+      display: flex; gap: 1.2rem; align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+    .contact-icon {
+      width: 36px; height: 36px; flex-shrink: 0;
+      border: 1px solid rgba(201,137,122,0.3);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--rose);
+    }
+    .contact-detail-text p:first-child {
+      font-size: 0.68rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--rose); margin-bottom: 0.3rem;
+    }
+    .contact-detail-text p:last-child {
+      font-size: 0.9rem; color: var(--charcoal);
+    }
+    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-group label {
+      font-size: 0.68rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--mid);
+    }
+    .form-group input, .form-group textarea, .form-group select {
+      background: transparent;
+      border: none; border-bottom: 1px solid rgba(90,85,80,0.25);
+      padding: 0.8rem 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; color: var(--charcoal);
+      outline: none; transition: border-color 0.3s;
+      appearance: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-bottom-color: var(--rose); }
+    .form-group textarea { resize: none; height: 100px; }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(90,85,80,0.4); }
+    .btn-form {
+      padding: 1rem 2.5rem;
+      background: var(--charcoal); color: var(--offwhite);
+      border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      align-self: flex-start; margin-top: 0.5rem;
+      transition: background 0.3s;
+    }
+    .btn-form:hover { background: var(--rose); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #0d0d0d;
+      padding: 3rem 5rem;
+      display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
+      border-top: 1px solid rgba(247,242,236,0.06);
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 600;
+      letter-spacing: 0.12em; color: var(--offwhite);
+    }
+    .footer-logo span { color: var(--gold); }
+    .footer-copy {
+      font-size: 0.72rem; color: rgba(247,242,236,0.3);
+      letter-spacing: 0.08em;
+    }
+    .footer-social { display: flex; gap: 1.5rem; }
+    .social-link {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(247,242,236,0.15);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(247,242,236,0.5); text-decoration: none;
+      transition: border-color 0.3s, color 0.3s;
+    }
+    .social-link:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-up {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      section { padding: 5rem 3rem; }
+      nav { padding: 1.2rem 2rem; }
+      nav.scrolled { padding: 0.9rem 2rem; }
+      .hero-left { padding: 7rem 2.5rem 3rem 3rem; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+      .portfolio-item:nth-child(4) { grid-column: span 1; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      nav.scrolled { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: 100svh;
+      }
+      .hero-left {
+        padding: 7rem 1.8rem 3rem;
+        order: 2;
+      }
+      .hero-right {
+        order: 1;
+        height: 45vh;
+      }
+      .hero::after { display: none; }
+      .scroll-hint { display: none; }
+      .hero-tagline { max-width: 100%; }
+
+      .about {
+        grid-template-columns: 1fr; gap: 3rem; padding: 5rem 1.8rem;
+      }
+      .about-image-side { order: -1; }
+      .about-img-box { aspect-ratio: 4/3; }
+      .about-img-accent { display: none; }
+      .about-stats { gap: 2rem; }
+
+      .portfolio { padding: 5rem 1.8rem; }
+      .portfolio-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+      .portfolio-item:nth-child(1) { grid-row: span 1; }
+      .portfolio-item:nth-child(4) { grid-column: span 1; }
+
+      .services { padding: 5rem 1.8rem; }
+      .services-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+      .testimonials { padding: 5rem 1.8rem; }
+      .testimonial-grid { grid-template-columns: 1fr; }
+
+      .contact {
+        grid-template-columns: 1fr; gap: 3rem; padding: 5rem 1.8rem;
+      }
+      .form-row { grid-template-columns: 1fr; }
+
+      footer { padding: 2.5rem 1.8rem; }
+      .footer-copy { order: 3; width: 100%; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: 2.4rem; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .portfolio-item:nth-child(1) { grid-row: span 1; }
+      .services-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up { opacity: 1; transform: none; }
+      * { transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">Payal<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" class="mob-link">About</a>
+    <a href="#portfolio" class="mob-link">Portfolio</a>
+    <a href="#services" class="mob-link">Services</a>
+    <a href="#contact" class="mob-link">Contact</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-left">
+      <p class="hero-eyebrow">— Fine Art Photography</p>
+      <h1 class="hero-title">
+        Capturing<br>Moments That
+        <em>Last Forever</em>
+      </h1>
+      <p class="hero-tagline">Every photograph tells a story. I craft images that breathe with emotion, light, and the quiet poetry of real life.</p>
+      <div class="hero-cta">
+        <a href="#portfolio" class="btn-primary">View Portfolio</a>
+        <a href="#contact" class="btn-outline">Book a Session</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-image-wrap">
+        <div class="hero-photo">
+          <!-- Real photo via Unsplash -->
+        </div>
+      </div>
+      <div class="hero-overlay-text">
+        <p>Mumbai · India</p>
+        <p style="margin-top:0.3rem;">Est. 2018</p>
+      </div>
+    </div>
+    <div class="scroll-hint">Scroll to explore</div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-text fade-up">
+      <p class="section-eyebrow">— About Me</p>
+      <h2 class="section-title">The Photographer<br>Behind the <em>Lens</em></h2>
+      <div class="divider"></div>
+      <p>I'm Payal, a Mumbai-based fine art photographer with over 6 years of experience capturing love stories, portraits, and the quiet magic of everyday life. My approach blends cinematic storytelling with an intimate documentary style.</p>
+      <p>I believe great photography isn't just about technical perfection — it's about creating a space where people feel free enough to be themselves, and then catching that truth in a single frame.</p>
+      <div class="about-stats">
+        <div>
+          <div class="stat-num">6<span>+</span></div>
+          <div class="stat-label">Years of Work</div>
+        </div>
+        <div>
+          <div class="stat-num">400<span>+</span></div>
+          <div class="stat-label">Happy Clients</div>
+        </div>
+        <div>
+          <div class="stat-num">12<span>k</span></div>
+          <div class="stat-label">Photos Delivered</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-image-side fade-up">
+      <div class="about-img-box">
+        <img src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=700&q=80" 
+             alt="Payal - Photographer" 
+             style="width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1;" />
+        <p class="about-img-label">Payal — Photographer</p>
+      </div>
+      <div class="about-img-accent"></div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="portfolio" id="portfolio">
+    <div class="portfolio-header fade-up">
+      <div>
+        <p class="section-eyebrow">— Selected Work</p>
+        <h2 class="section-title">My <em>Portfolio</em></h2>
+      </div>
+      <div class="portfolio-filters">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">Weddings</button>
+        <button class="filter-btn">Portraits</button>
+        <button class="filter-btn">Events</button>
+        <button class="filter-btn">Fashion</button>
+      </div>
+    </div>
+
+    <div class="portfolio-grid fade-up">
+      <!-- Item 1: tall - Wedding -->
+      <div class="portfolio-item">
+        <div class="portfolio-thumb photo-1" style="height:100%; min-height: 460px;"></div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-info">
+            <p>Aria & Rohan</p>
+            <span>Wedding · Goa</span>
+          </div>
+        </div>
+      </div>
+      <!-- Item 2 - Portrait -->
+      <div class="portfolio-item">
+        <div class="portfolio-thumb photo-2" style="min-height: 220px;"></div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-info">
+            <p>Evening Light</p>
+            <span>Portrait · Mumbai</span>
+          </div>
+        </div>
+      </div>
+      <!-- Item 3 - Fashion -->
+      <div class="portfolio-item">
+        <div class="portfolio-thumb photo-3" style="min-height: 220px;"></div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-info">
+            <p>Golden Hour</p>
+            <span>Fashion · Jaipur</span>
+          </div>
+        </div>
+      </div>
+      <!-- Item 4: wide - Event -->
+      <div class="portfolio-item">
+        <div class="portfolio-thumb photo-4" style="min-height: 220px;"></div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-info">
+            <p>The Mehendi</p>
+            <span>Event · Udaipur</span>
+          </div>
+        </div>
+      </div>
+      <!-- Item 5 - Wedding -->
+      <div class="portfolio-item">
+        <div class="portfolio-thumb photo-5" style="min-height: 220px;"></div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-info">
+            <p>Priya & Dev</p>
+            <span>Wedding · Delhi</span>
+          </div>
+        </div>
+      </div>
+      <!-- Item 6 - Portrait -->
+      <div class="portfolio-item">
+        <div class="portfolio-thumb photo-6" style="min-height: 220px;"></div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-info">
+            <p>Monsoon Study</p>
+            <span>Portrait · Mumbai</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="fade-up" style="max-width:600px;">
+      <p class="section-eyebrow">— What I Offer</p>
+      <h2 class="section-title">Photography <em>Services</em></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="services-grid fade-up">
+
+      <!-- Wedding -->
+      <div class="service-card">
+        <div class="service-photo">
+          <img src="https://images.unsplash.com/photo-1519741347686-c1e0aadf4611?w=700&q=80" alt="Wedding Photography" />
+          <div class="service-photo-overlay"></div>
+          <span class="service-num-badge">01</span>
+        </div>
+        <div class="service-body">
+          <h3 class="service-name">Wedding Photography</h3>
+          <p class="service-desc">Full-day candid and traditional coverage of your wedding day. From getting-ready to the final goodbye.</p>
+          <p class="service-price">Starting ₹35,000</p>
+        </div>
+      </div>
+
+      <!-- Portrait -->
+      <div class="service-card">
+        <div class="service-photo">
+          <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=700&q=80" alt="Portrait Sessions" />
+          <div class="service-photo-overlay"></div>
+          <span class="service-num-badge">02</span>
+        </div>
+        <div class="service-body">
+          <h3 class="service-name">Portrait Sessions</h3>
+          <p class="service-desc">Intimate personal portraits, family sessions, and professional headshots. Tailored to reveal the real you.</p>
+          <p class="service-price">Starting ₹8,000</p>
+        </div>
+      </div>
+
+      <!-- Pre-Wedding -->
+      <div class="service-card">
+        <div class="service-photo">
+          <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=700&q=80" alt="Pre-Wedding Shoot" />
+          <div class="service-photo-overlay"></div>
+          <span class="service-num-badge">03</span>
+        </div>
+        <div class="service-body">
+          <h3 class="service-name">Pre-Wedding Shoot</h3>
+          <p class="service-desc">Romantic storytelling shoots at locations of your choice. Golden hour, heritage, nature — you dream it.</p>
+          <p class="service-price">Starting ₹15,000</p>
+        </div>
+      </div>
+
+      <!-- Event -->
+      <div class="service-card">
+        <div class="service-photo">
+          <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=700&q=80" alt="Event Coverage" />
+          <div class="service-photo-overlay"></div>
+          <span class="service-num-badge">04</span>
+        </div>
+        <div class="service-body">
+          <h3 class="service-name">Event Coverage</h3>
+          <p class="service-desc">Corporate events, product launches, sangeet, mehendi, and celebrations of all kinds — documented beautifully.</p>
+          <p class="service-price">Starting ₹12,000</p>
+        </div>
+      </div>
+
+      <!-- Fashion -->
+      <div class="service-card">
+        <div class="service-photo">
+          <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=700&q=80" alt="Fashion & Editorial" />
+          <div class="service-photo-overlay"></div>
+          <span class="service-num-badge">05</span>
+        </div>
+        <div class="service-body">
+          <h3 class="service-name">Fashion & Editorial</h3>
+          <p class="service-desc">High-fashion lookbooks, brand campaigns, and editorial spreads. Conceptual, bold, unforgettable.</p>
+          <p class="service-price">Starting ₹20,000</p>
+        </div>
+      </div>
+
+      <!-- Maternity -->
+      <div class="service-card">
+        <div class="service-photo">
+          <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=700&q=80" alt="Maternity & Newborn" />
+          <div class="service-photo-overlay"></div>
+          <span class="service-num-badge">06</span>
+        </div>
+        <div class="service-body">
+          <h3 class="service-name">Maternity & Newborn</h3>
+          <p class="service-desc">Tender, glowing sessions for the most precious chapters — bump shoots, newborn portraits, first smiles.</p>
+          <p class="service-price">Starting ₹10,000</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="fade-up">
+      <p class="section-eyebrow">— Kind Words</p>
+      <h2 class="section-title">What My <em>Clients</em> Say</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="testimonial-grid fade-up">
+
+      <div class="testimonial-card">
+        <span class="quote-mark">"</span>
+        <p class="testimonial-text">Payal captured emotions we didn't even know we were feeling. Every photo from our wedding day feels like a painting. We're in love with every single frame.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">A</div>
+          <div>
+            <p class="author-name">Ananya Sharma</p>
+            <p class="author-detail">Wedding · Mumbai, 2024</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <span class="quote-mark">"</span>
+        <p class="testimonial-text">I was so nervous for my portrait session, but Payal made everything so easy and comfortable. The results were absolutely stunning — I've never felt so beautiful on camera.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">R</div>
+          <div>
+            <p class="author-name">Riya Mehta</p>
+            <p class="author-detail">Portrait · Pune, 2024</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <span class="quote-mark">"</span>
+        <p class="testimonial-text">Our pre-wedding shoot in Rajasthan was a dream. Payal's eye for light and composition is extraordinary. The photos look like a magazine editorial — truly world-class.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">V</div>
+          <div>
+            <p class="author-name">Vikram & Neha</p>
+            <p class="author-detail">Pre-Wedding · Jaipur, 2023</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="fade-up">
+      <p class="section-eyebrow">— Get in Touch</p>
+      <h2 class="section-title">Let's Create Something <em>Beautiful</em></h2>
+      <div class="divider"></div>
+      <p class="contact-intro">Whether you're planning a wedding, a personal shoot, or a brand campaign — I'd love to hear your story. Reach out and let's make something unforgettable together.</p>
+
+      <div class="contact-detail">
+        <div class="contact-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4l6 5 6-5M2 3h12a1 1 0 011 1v8a1 1 0 01-1 1H2a1 1 0 01-1-1V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="contact-detail-text">
+          <p>Email</p>
+          <p>hello@payalphotography.in</p>
+        </div>
+      </div>
+
+      <div class="contact-detail">
+        <div class="contact-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13 10.5c-.8-.8-2.4-.8-3.2 0l-.8.8C7.6 10.3 5.7 8.4 4.7 7l.8-.8c.8-.8.8-2.4 0-3.2L3.7 1.2C2.9.4 1.5.4.7 1.2L.3 1.6C-.9 2.8-.2 6.5 3.5 10.2c3.7 3.7 7.4 4.4 8.6 3.2l.4-.4c.8-.8.8-2.3.5-2.5z" stroke="currentColor" stroke-width="1.2"/></svg>
+        </div>
+        <div class="contact-detail-text">
+          <p>Phone</p>
+          <p>+91 98765 43210</p>
+        </div>
+      </div>
+
+      <div class="contact-detail">
+        <div class="contact-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5C5.5 1.5 3.5 3.5 3.5 6c0 3.5 4.5 8.5 4.5 8.5S12.5 9.5 12.5 6c0-2.5-2-4.5-4.5-4.5z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="6" r="1.5" stroke="currentColor" stroke-width="1.2"/></svg>
+        </div>
+        <div class="contact-detail-text">
+          <p>Location</p>
+          <p>Mumbai, Maharashtra · Pan India Travel</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form fade-up">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="Priya" />
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Sharma" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@email.com" />
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="+91 " />
+      </div>
+      <div class="form-group">
+        <label>Service Interested In</label>
+        <select>
+          <option value="">Select a service...</option>
+          <option>Wedding Photography</option>
+          <option>Portrait Session</option>
+          <option>Pre-Wedding Shoot</option>
+          <option>Event Coverage</option>
+          <option>Fashion & Editorial</option>
+          <option>Maternity & Newborn</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tell Me About Your Vision</label>
+        <textarea placeholder="Share your story, event date, location, or anything you'd like me to know..."></textarea>
+      </div>
+      <button class="btn-form">Send Message</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Payal<span>.</span>Photography</div>
+    <p class="footer-copy">© 2025 Payal Photography · Mumbai · All rights reserved</p>
+    <div class="footer-social">
+      <!-- Instagram -->
+      <a href="#" class="social-link" aria-label="Instagram">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14" rx="4" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.2"/><circle cx="11.5" cy="4.5" r="0.8" fill="currentColor"/></svg>
+      </a>
+      <!-- Pinterest -->
+      <a href="#" class="social-link" aria-label="Pinterest">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M6 14c.5-1.5 1-3 1-4-1 1.5-3-.5-2-2.5C6 5 9 5 9.5 7c.5 2-1 4-2 3l-1 4" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
+      </a>
+      <!-- WhatsApp -->
+      <a href="#" class="social-link" aria-label="WhatsApp">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8c0 1.7 1.3 3 3 3 .5 0 1-.1 1.4-.4l1.6.4-.4-1.6c.3-.4.4-.9.4-1.4C11 6.3 9.7 5 8 5S5 6.3 5 8z" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobLinks = document.querySelectorAll('.mob-link');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    mobLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Fade-up on scroll
+    const fadeEls = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    fadeEls.forEach(el => observer.observe(el));
+
+    // Portfolio filter (visual only)
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
